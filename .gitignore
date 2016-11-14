@@ -1,0 +1,8 @@
+.vscode/
+Assembly-CSharp-Editor-firstpass.csproj
+Assembly-CSharp.csproj
+Popper_iOS.sln
+Library/
+ProjectSettings
+Temp/
+*.meta
