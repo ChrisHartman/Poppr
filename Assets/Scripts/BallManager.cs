@@ -4,7 +4,6 @@ using UnityEngine.SceneManagement;
 
 public class BallManager : MonoBehaviour {
 	public GameObject BallPrefab;
-	public KeyCode RestartKey;
 
 	public event Action PoppedCorrectColor = delegate { };
 	public event Action PoppedIncorrectColor = delegate { };
@@ -31,17 +30,14 @@ public class BallManager : MonoBehaviour {
 		// }
 		// NewBall();
 		Ball = Instantiate(BallPrefab);
-		needNewBall = true;
+		needNewBall = false;
+		Invoke("NewBall", 1f);
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		if (needNewBall && Time.timeScale > 0) {
 			NewBall();
-		}
-		if (Time.timeScale == 0 && Input.GetKey(RestartKey))  {
-			SceneManager.LoadScene (SceneManager.GetActiveScene ().name);
-			Time.timeScale = 1;
 		}
 	}
 

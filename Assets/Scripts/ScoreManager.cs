@@ -9,8 +9,15 @@ public class ScoreManager : MonoBehaviour {
 	public Text scoreText;
 	public Text livesText;
 	public Text gameOverText;
+	public KeyCode RestartKey;
 	// Use this for initialization
+
+	void Awake() {
+		Application.targetFrameRate = 60;
+	}
+
 	void Start () {
+
 		gameOverText.enabled = false;
 		lives = 3;
 		var ballManager = FindObjectOfType<BallManager>();
@@ -19,8 +26,13 @@ public class ScoreManager : MonoBehaviour {
 		score = 0;
 	}
 	
+	
 	// Update is called once per frame
 	void Update () {
+		if (Time.timeScale == 0 && (Input.GetKey(RestartKey) || Input.touchCount == 1))  {
+			SceneManager.LoadScene (SceneManager.GetActiveScene ().name);
+			Time.timeScale = 1;
+		}
 	}
 	/// <summary>
     /// The score has increased.

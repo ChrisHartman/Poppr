@@ -5,4 +5,5 @@ Popper_iOS.sln
 Library/
 ProjectSettings
 Temp/
+Builds/
 *.meta
