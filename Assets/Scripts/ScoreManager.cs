@@ -5,7 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class ScoreManager : MonoBehaviour {
 	int score;
-	int lives;
+	public int lives;
+	int highscore;
 	public Text scoreText;
 	public Text livesText;
 	public Text gameOverText;
@@ -17,23 +18,20 @@ public class ScoreManager : MonoBehaviour {
 	}
 
 	void Start () {
-
+		highscore = PlayerPrefs.GetInt ("highscore", highscore);
 		gameOverText.enabled = false;
-		lives = 3;
 		var ballManager = FindObjectOfType<BallManager>();
         ballManager.PoppedCorrectColor += IncrementScore;
 		ballManager.PoppedIncorrectColor += LoseLife;
 		score = 0;
 	}
-	
-	
-	// Update is called once per frame
-	void Update () {
-		if (Time.timeScale == 0 && (Input.GetKey(RestartKey) || Input.touchCount == 1))  {
-			SceneManager.LoadScene (SceneManager.GetActiveScene ().name);
-			Time.timeScale = 1;
-		}
+
+	public int LifeCount() {
+		return lives;
 	}
+	
+	
+	
 	/// <summary>
     /// The score has increased.
     /// </summary>
@@ -51,11 +49,21 @@ public class ScoreManager : MonoBehaviour {
 		}
 	}
 
+	void HighScoreCheck() {
+		if (highscore < score) {
+			highscore = score;
+			PlayerPrefs.SetInt ("highscore", highscore);
+		}
+	}
+
 	void GameOver() {
-		Time.timeScale = 0;
-		gameOverText.text += score.ToString();
-		livesText.enabled = false;
-		scoreText.enabled = false;
-		gameOverText.enabled = true;
+		FindObjectOfType<BallManager>().Die();
+		HighScoreCheck();
+		GameOverScoreManager.score = score;
+		SceneManager.LoadScene ("GameOver");
+		// gameOverText.text += score.ToString() + "\nHigh Score: " + highscore;
+		// livesText.enabled = false;
+		// scoreText.enabled = false;
+		// gameOverText.enabled = true;
 	}
 }

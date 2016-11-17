@@ -36,7 +36,7 @@ public class BallManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (needNewBall && Time.timeScale > 0) {
+		if (needNewBall) {
 			NewBall();
 		}
 	}
@@ -47,6 +47,10 @@ public class BallManager : MonoBehaviour {
 		ballColor = UnityEngine.Random.Range(0,BallColors.Length);
 		Ball.GetComponent<SpriteRenderer>().color = BallColors[ballColor];
 		needNewBall = false;
+	}
+
+	public void Die() {
+		Ball.gameObject.SetActive(false);
 	}
 	/// Sent when another object leaves a trigger collider attached to
 	/// this object (2D physics only).
