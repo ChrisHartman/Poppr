@@ -6,6 +6,6 @@ public class MainMenu : MonoBehaviour {
 
     // Call from inspector button
     public void ResumeGame () {
-        SceneManager.LoadScene ("Main"); 
+        SceneManager.LoadScene ("Main");
     }
 }

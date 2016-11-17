@@ -7,6 +7,7 @@ public class BallManager : MonoBehaviour {
 
 	public event Action PoppedCorrectColor = delegate { };
 	public event Action PoppedIncorrectColor = delegate { };
+	private AudioSource PoppingSound;
 
 	private Color[] BallColors = {
 		new Color32(145, 233, 255, 0xFF),
@@ -29,6 +30,7 @@ public class BallManager : MonoBehaviour {
 		// 	Balls[i].GetComponent<SpriteRenderer>().color = BallColors[i];
 		// }
 		// NewBall();
+		PoppingSound = GetComponent<AudioSource>();
 		Ball = Instantiate(BallPrefab);
 		needNewBall = false;
 		Invoke("NewBall", 1f);
@@ -58,6 +60,7 @@ public class BallManager : MonoBehaviour {
 	/// <param name="other">The other Collider2D involved in this collision.</param>
 	void OnTriggerExit2D(Collider2D other)
 	{
+		// PoppingSound.Play();
 		int colorPopped = (int)(FindObjectOfType<SpikeBallController>().transform.eulerAngles.z / 90);
 		// print(string.Format("Popped = {0}, Color = {1}",colorPopped, ballColor));
 		if (ballColor == colorPopped) {
