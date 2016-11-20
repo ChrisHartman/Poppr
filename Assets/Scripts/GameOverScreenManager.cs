@@ -11,7 +11,7 @@ public class GameOverScreenManager : MonoBehaviour {
 	void Start () {
 		score = GameOverScoreManager.score;
 		highscore = PlayerPrefs.GetInt ("highscore", highscore);
-//		Debug.Log(highscore);
+		Debug.Log(highscore);
 		gameOverText.text += score.ToString() + "\nHigh Score: " + highscore.ToString();
 	}
 

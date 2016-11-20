@@ -8,4 +8,7 @@ public class MainMenu : MonoBehaviour {
     public void ResumeGame () {
         SceneManager.LoadScene ("Main");
     }
+    public void Awake () {
+		Application.targetFrameRate = 60;
+    }
 }

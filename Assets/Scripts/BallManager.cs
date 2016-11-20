@@ -19,24 +19,13 @@ public class BallManager : MonoBehaviour {
 	private int ballColor;
 	private bool needNewBall;
 
-	//GameObject[] Balls = new GameObject[4];
-	// {{189, 255, 145}, {255, 233, 145}, {255, 145, 145}, {145, 233, 255}}
-	// Use this for initialization
 	void Start () {
-		// for (int i = 0; i < Balls.Length; i++) {
-		// 	Balls[i] = Instantiate(BallPrefab);
-		// 	Balls[i].GetComponent<Rigidbody2D>().velocity = new Vector3(0,5,0);
-		// 	Balls[i].SetActive(false);
-		// 	Balls[i].GetComponent<SpriteRenderer>().color = BallColors[i];
-		// }
-		// NewBall();
 		PoppingSound = GetComponent<AudioSource>();
 		Ball = Instantiate(BallPrefab);
 		needNewBall = false;
 		Invoke("NewBall", 1f);
 	}
 	
-	// Update is called once per frame
 	void Update () {
 		if (needNewBall) {
 			NewBall();
@@ -54,15 +43,10 @@ public class BallManager : MonoBehaviour {
 	public void Die() {
 		Ball.gameObject.SetActive(false);
 	}
-	/// Sent when another object leaves a trigger collider attached to
-	/// this object (2D physics only).
-	/// </summary>
-	/// <param name="other">The other Collider2D involved in this collision.</param>
+
 	void OnTriggerExit2D(Collider2D other)
 	{
-		// PoppingSound.Play();
 		int colorPopped = (int)(FindObjectOfType<SpikeBallController>().transform.eulerAngles.z / 90);
-		// print(string.Format("Popped = {0}, Color = {1}",colorPopped, ballColor));
 		if (ballColor == colorPopped) {
 			PoppedCorrectColor();
 		} else {

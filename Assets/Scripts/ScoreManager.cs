@@ -18,7 +18,7 @@ public class ScoreManager : MonoBehaviour {
 	}
 
 	void Start () {
-		highscore = PlayerPrefs.GetInt ("highscoreios", highscore);
+		highscore = PlayerPrefs.GetInt ("highscore", highscore);
 		gameOverText.enabled = false;
 		var ballManager = FindObjectOfType<BallManager>();
         ballManager.PoppedCorrectColor += IncrementScore;
