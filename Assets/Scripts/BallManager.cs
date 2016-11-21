@@ -21,9 +21,12 @@ public class BallManager : MonoBehaviour {
 
 	void Start () {
 		PoppingSound = GetComponent<AudioSource>();
-		Ball = Instantiate(BallPrefab);
 		needNewBall = false;
 		Invoke("NewBall", 1f);
+	}
+
+	void Awake () {
+		Ball = Instantiate(BallPrefab);
 	}
 	
 	void Update () {
@@ -42,6 +45,11 @@ public class BallManager : MonoBehaviour {
 
 	public void Die() {
 		Ball.gameObject.SetActive(false);
+	}
+	public void Revive() {
+		Ball.gameObject.SetActive(true);
+		Debug.Log("waking up!");
+		NewBall();
 	}
 
 	void OnTriggerExit2D(Collider2D other)
