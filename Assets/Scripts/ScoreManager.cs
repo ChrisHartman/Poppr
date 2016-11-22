@@ -57,13 +57,16 @@ public class ScoreManager : MonoBehaviour {
 	}
 
 	void GameOver() {
-		FindObjectOfType<BallManager>().Die();
+		//Time.timeScale = 0;
 		HighScoreCheck();
 		GameOverScoreManager.score = score;
-		SceneManager.LoadScene ("GameOver");
+		Invoke("GameOverSceneLoad", 1f);
 		// gameOverText.text += score.ToString() + "\nHigh Score: " + highscore;
 		// livesText.enabled = false;
 		// scoreText.enabled = false;
 		// gameOverText.enabled = true;
+	}
+	void GameOverSceneLoad() {
+		SceneManager.LoadScene ("GameOver");
 	}
 }

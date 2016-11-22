@@ -10,8 +10,10 @@ public class GameOverScreenManager : MonoBehaviour {
 	public Text gameOverText;
 	// Use this for initialization
 	void Start () {
+		Time.timeScale = 1;
 		score = GameOverScoreManager.score;
 		//LeaderBoard.ReportScore(score, "1");
+		// FindObjectOfType<HitBlockController>().FadeInSlowly();
 		highscore = PlayerPrefs.GetInt ("highscore", highscore);
 		//Debug.Log(highscore);
 		gameOverText.text += score.ToString() + "\nHigh Score: " + highscore.ToString();
