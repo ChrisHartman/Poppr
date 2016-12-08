@@ -5,25 +5,7 @@ public class GameOverScoreManager : MonoBehaviour {
 	//private int score	// Use this for initialization
 
 	public static int score;
-	void Start () {
-		
-	
-	}
+	public static string highscorestring;
+	public static string scene;
 
-	void Awake () {
-		//DontDestroyOnLoad(transform.gameObject);
-	}
-
-	public void Set(int s) {
-		score = s;
-	}
-
-	public int Get() {
-		return score;
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
 }

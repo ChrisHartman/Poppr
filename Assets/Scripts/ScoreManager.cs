@@ -11,6 +11,9 @@ public class ScoreManager : MonoBehaviour {
 	public Text livesText;
 	public Text gameOverText;
 	public KeyCode RestartKey;
+	public string leaderboard;
+	public string highscorestring;
+	//public string scene;
 	// Use this for initialization
 
 	void Awake() {
@@ -18,7 +21,11 @@ public class ScoreManager : MonoBehaviour {
 	}
 
 	void Start () {
-		highscore = PlayerPrefs.GetInt ("highscore", highscore);
+		GameOverScoreManager.highscorestring = highscorestring;
+		GameOverScoreManager.scene = SceneManager.GetActiveScene ().name;
+		Debug.Log("Highscorestring"+highscorestring);
+		highscore = PlayerPrefs.GetInt (highscorestring, highscore);
+		Debug.Log("Highscore: " + highscore);
 		gameOverText.enabled = false;
 		var ballManager = FindObjectOfType<BallManager>();
         ballManager.PoppedCorrectColor += IncrementScore;
@@ -41,19 +48,26 @@ public class ScoreManager : MonoBehaviour {
     }
 
 	void LoseLife() {
-		lives--;
-		if (lives < 0) {
-			GameOver();
-		} else {
-		livesText.text = "Lives: " + lives.ToString();
+		if (lives < 100) {
+			lives--;
+			if (lives < 0) {
+				GameOver();
+			} else {
+			livesText.text = "Lives: " + lives.ToString();
+			}
 		}
 	}
 
 	void HighScoreCheck() {
 		if (highscore < score) {
 			highscore = score;
-			PlayerPrefs.SetInt ("highscore", highscore);
+			PlayerPrefs.SetInt (highscorestring, highscore);
+			Debug.Log("reporting " + highscore + " to " +highscorestring);
 		}
+		Debug.Log ("Reporting to " + leaderboard);
+		Social.ReportScore (score, leaderboard, success => {
+		Debug.Log(success ? "Reported score successfully" : "Failed to report score");
+		});
 	}
 
 	void GameOver() {

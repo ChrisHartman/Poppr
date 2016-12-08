@@ -12,13 +12,13 @@ public class SpikeBallController : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void FixedUpdate () {
 		//if (Input.GetKey(right) || ((Input.touchCount == 1) && Input.GetTouch(0).position.x > Screen.width/2)) {
 		if (Input.GetKey(left) || ((Input.touchCount == 1) && Input.GetTouch(0).position.x < Screen.width/2)) {
-			rb.AddTorque(200*Time.deltaTime);
+			rb.AddTorque(200*Time.fixedDeltaTime); 
 		}
 		if (Input.GetKey(right) || ((Input.touchCount == 1) && Input.GetTouch(0).position.x > Screen.width/2)) {
-			rb.AddTorque(-200*Time.deltaTime);
+			rb.AddTorque(-200*Time.fixedDeltaTime);
 		}
 	}
 }

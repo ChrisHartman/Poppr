@@ -27,6 +27,8 @@ public class BallManager : MonoBehaviour {
 		needNewBall = false;
 		Invoke("NewBall", 1f);
 		repeatCount = 0;
+		//Time.timeScale = 1f;
+		
 	}
 
 	void Awake () {

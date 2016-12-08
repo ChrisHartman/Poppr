@@ -5,25 +5,26 @@ using UnityEngine.UI;
 
 public class HitBlockController : MonoBehaviour {
 	private Image image;
-	private float alpha;
-	public bool gameOver;
+	private bool gameOver;
+	public bool practice;
+	public float alpha;
+	public float alphaincrementer;
 	// Use this for initialization
 	void Awake() {
-		alpha = .1f;
 		image = GetComponent<Image>();
 		if (!gameOver) {
 			image.canvasRenderer.SetAlpha(0f);
 			var ballManager = FindObjectOfType<BallManager>();
 			ballManager.PoppedIncorrectColor += FadeInAndOut;
 		} else {
-			image.canvasRenderer.SetAlpha(.3f);
+			image.canvasRenderer.SetAlpha(.5f);
 		}
 	}
 	void Start () {
 		if (!gameOver) {
 			image.canvasRenderer.SetAlpha(0f);
 		} else {
-			image.canvasRenderer.SetAlpha(.3f);
+			image.canvasRenderer.SetAlpha(.5f);
 		}
 		
 	}
@@ -40,8 +41,11 @@ public class HitBlockController : MonoBehaviour {
 		} else {
 			FadeInSlowly();
 		}
-		alpha+=.1f;
-	}
+		if(!practice) {
+
+			alpha+=alphaincrementer;
+		}
+	}	
 	void FadeOut () {
 		image.CrossFadeAlpha(0f, .5f, false);
 	}
@@ -49,7 +53,7 @@ public class HitBlockController : MonoBehaviour {
 		image.CrossFadeAlpha(alpha, .3f, false);
 	}
 	public void FadeInSlowly() {
-		image.CrossFadeAlpha(.3f, 1f, false);
+		image.CrossFadeAlpha(alpha, 1f, false);
 	}
 	
 }

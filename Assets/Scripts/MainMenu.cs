@@ -9,6 +9,21 @@ public class MainMenu : MonoBehaviour {
     public void ResumeGame () {
         SceneManager.LoadScene ("Main");
     }
+    public void ResumeGameExpert() {
+        SceneManager.LoadScene ("Expert Mode");
+    }
+    public void ResumeGamePractice() {
+        SceneManager.LoadScene ("Practice Mode");
+    }
+    public void Menu() {
+        SceneManager.LoadScene ("MainMenu");
+    }
+    public void Tutorial() {
+        SceneManager.LoadScene ("Tutorial");
+    }
+    public void Play() {
+        SceneManager.LoadScene ("Play");
+    }
     public void Awake () {
 		Application.targetFrameRate = 60;
         Social.localUser.Authenticate (ProcessAuthentication);
