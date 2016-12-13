@@ -52,7 +52,7 @@ public class BallManager : MonoBehaviour {
 		} else {
 			repeatCount = 0;
 		}
-		if (repeatCount > 0) {
+		if (repeatCount > 4) {
 			while (ballColor == oldColor) {
 				ballColor = UnityEngine.Random.Range(0,BallColors.Length);
 			}
