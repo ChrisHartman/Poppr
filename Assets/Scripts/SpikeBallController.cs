@@ -2,8 +2,9 @@
 using System.Collections;
 
 public class SpikeBallController : MonoBehaviour {
-	public KeyCode right;
-	public KeyCode left;
+	public float Torque = 175f;
+	public KeyCode right, left;
+	
 	private Rigidbody2D rb;
 
 	// Use this for initialization
@@ -15,10 +16,10 @@ public class SpikeBallController : MonoBehaviour {
 	void FixedUpdate () {
 		//if (Input.GetKey(right) || ((Input.touchCount == 1) && Input.GetTouch(0).position.x > Screen.width/2)) {
 		if (Input.GetKey(left) || ((Input.touchCount == 1) && Input.GetTouch(0).position.x < Screen.width/2)) {
-			rb.AddTorque(200*Time.fixedDeltaTime); 
+			rb.AddTorque(Torque*Time.fixedDeltaTime); 
 		}
 		if (Input.GetKey(right) || ((Input.touchCount == 1) && Input.GetTouch(0).position.x > Screen.width/2)) {
-			rb.AddTorque(-200*Time.fixedDeltaTime);
+			rb.AddTorque(-Torque*Time.fixedDeltaTime);
 		}
 	}
 }
